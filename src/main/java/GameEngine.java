@@ -12,11 +12,6 @@ public class GameEngine {
     public GameEngine(int min, int max) {
         this.min = min;
         this.max = max;
-        this.attempts = 0;
-        this.gameWon = false;
-        this.userQuit = false;
-        this.gameOver = false;
-        reset();
     }
 
     public GuessResult makeGuess(int guess) {
@@ -31,10 +26,19 @@ public class GameEngine {
         if (guess == target) {
             gameWon = true;
             return new GuessResult(true, "Correct! You guessed it in " + attempts + " attempts.", attempts);
-        } else if (guess < target) {
-            return new GuessResult(false, "Too low! Try a higher number.", attempts);
+        } else if (attempts >= MAX_ATTEMPTS) {
+            gameOver = true;
+            return new GuessResult(false, "Game Over! You've used all " + MAX_ATTEMPTS + " attempts. The number was " + target + ".", attempts);
         } else {
-            return new GuessResult(false, "Too high! Try a lower number.", attempts);
+            int remaining = MAX_ATTEMPTS - attempts;
+            GuessResult result;
+            if (guess < target) {
+                result = new GuessResult(false, "Too low! Try a higher number.", attempts);
+            } else {
+                result = new GuessResult(false, "Too high! Try a lower number.", attempts);
+            }
+            result.setRemainingAttempts(remaining);
+            return result;
         }
     }
 
