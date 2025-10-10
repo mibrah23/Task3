@@ -4,12 +4,14 @@ public class GameEngine {
     private int target;
     private int attempts;
     private boolean gameWon;
+    private boolean hintsEnabled;
 
     public GameEngine(int min, int max) {
         this.min = min;
         this.max = max;
         this.attempts = 0;
         this.gameWon = false;
+        this.hintsEnabled = true;
         reset();
     }
 
