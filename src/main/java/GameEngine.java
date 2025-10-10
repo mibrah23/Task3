@@ -21,10 +21,16 @@ public class GameEngine {
         if (guess == target) {
             gameWon = true;
             return new GuessResult(true, "Correct! You guessed it in " + attempts + " attempts.", attempts);
-        } else if (guess < target) {
-            return new GuessResult(false, "Too low!", attempts);
         } else {
-            return new GuessResult(false, "Too high!", attempts);
+            String hint = getHint(guess);
+            GuessResult result;
+            if (guess < target) {
+                result = new GuessResult(false, "Too low!", attempts);
+            } else {
+                result = new GuessResult(false, "Too high!", attempts);
+            }
+            result.setHint(hint);
+            return result;
         }
     }
 
