@@ -66,7 +66,6 @@ public class GameEngineTest {
         assertEquals(100, engine.getMax());
     }
 
-
     @Test
     public void testMaxAttemptsReached() {
         engine.setTarget(50);

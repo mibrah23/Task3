@@ -1,6 +1,5 @@
 public class GameEngine {
     private static final int MAX_ATTEMPTS = 10;
-
     private final int min;
     private final int max;
     private int target;
@@ -49,6 +48,7 @@ public class GameEngine {
             return result;
         }
     }
+
     public void reset() {
         target = Utils.randomInt(min, max);
         attempts = 0;
@@ -97,7 +97,6 @@ public class GameEngine {
         if (!hintsEnabled) {
             return "";
         }
-
         int diff = Math.abs(target - guess);
         if (attempts >= 3 && diff <= 10) {
             return " HINT: You're very close!";
